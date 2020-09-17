@@ -54,6 +54,7 @@
                 </div>
             </div>
         </div>
+        @include('shared.footer')
         <script>
             if (navigator.geolocation) {
                 var marker;
@@ -64,14 +65,14 @@
                     currentLocation = new L.LatLng( position.coords.latitude, position.coords.longitude );
 
                     $("#locations").append('<div class="col-sm-4 col-lg-2"><div class="card" style="width: auto;"><img width="auto" height="180rem" src="https://thumbs.dreamstime.com/z/your-current-location-pointer-29429678.jpg" alt=""> <div class="card-body"> <h5 class="card-title">Current Location</h5> <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p><button class="btn btn-primary col-12" onclick="updateMarker('+position.coords.latitude+','+position.coords.longitude+')">Current location</button></div></div></div>');
-                    // L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=sk.eyJ1IjoiZ2FicmllbDI3OTMiLCJhIjoiY2tlazZoaDB1MDN2bjJybnFyMWtrY24waCJ9.aKhBlKEySAg3fT4J-iOtgA', {
-                    //     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                    //     maxZoom: 400,
-                    //     id: 'mapbox/streets-v11',
-                    //     tileSize: 512,
-                    //     zoomOffset: -1,
-                    //     accessToken: 'sk.eyJ1IjoiZ2FicmllbDI3OTMiLCJhIjoiY2tlazZoaDB1MDN2bjJybnFyMWtrY24waCJ9.aKhBlKEySAg3fT4J-iOtgA'
-                    // }).addTo(mymap);
+                    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=sk.eyJ1IjoiZ2FicmllbDI3OTMiLCJhIjoiY2tlazZoaDB1MDN2bjJybnFyMWtrY24waCJ9.aKhBlKEySAg3fT4J-iOtgA', {
+                        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                        maxZoom: 400,
+                        id: 'mapbox/streets-v11',
+                        tileSize: 512,
+                        zoomOffset: -1,
+                        accessToken: 'sk.eyJ1IjoiZ2FicmllbDI3OTMiLCJhIjoiY2tlazZoaDB1MDN2bjJybnFyMWtrY24waCJ9.aKhBlKEySAg3fT4J-iOtgA'
+                    }).addTo(mymap);
                     marker = L.marker([ position.coords.latitude, position.coords.longitude ]).addTo(mymap);
                 } );
             } else {

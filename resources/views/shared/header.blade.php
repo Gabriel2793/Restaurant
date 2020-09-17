@@ -16,9 +16,6 @@
             <a class="nav-link" href="<?php echo (route('welcome'));?>">Bienvenido <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?php echo ( url('/register') ); ?>">Registrate</a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link" href="<?php echo ( url('/login') ); ?>">Ingresar</a>
         </li>
       @endguest
@@ -32,6 +29,9 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?= route('restaurant.form') ?>">Agregar sucursal</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo ( url('/register') ); ?>">Registrate</a>
             </li>
         @endif
         <li class="nav-item dropdown">

@@ -54,18 +54,20 @@ Route::post( '/addsaucer', 'AddSaucerController@index' )->name( 'saucer.add' );
 
 $router->get( '/branchoffices', 'BranchOfficesController@index')->name('restaurant.branchoffices');
 
-Route::post( '/addOrder', function ( Request $request ) {
+Route::post( '/addOrder/{table_number}', function ( $table_number, Request $request ) {
     $saucer =  $request->input();
+    // var_dump(sizeof( $saucer ));
     $keys = array();
     $matches = array();
 
-    if( sizeof( $request->input() ) === 0 ) {
-        $keys = 'empty';
+    if( sizeof( $saucer ) === 0 ) {
+        return response()->json([ 'success'=>false ]);
     }else{
         DB::beginTransaction();
             $order_id = DB::table('orders')->insertGetId([
                 'user_id' => Auth::id(),
-                'action' => 'taken'
+                'action' => 'taken',
+                'table_number' => $table_number
             ]);
 
             foreach( $saucer as $key => $value ) {
@@ -77,21 +79,20 @@ Route::post( '/addOrder', function ( Request $request ) {
                 ]);
             }
         DB::commit();
+        return response()->json([ 'success'=>true, 'order_id'=>$order_id ]);
     }
-
-    return response()->json([ 'success'=>$keys ]);
 } )->name('order.add');
 
 Route::post( '/getSoucers', function(Request $request) {
     $saucers = DB::select('select sa.id, sa.name name, sa.image image, sa.description description, sa.type type, sa.created_at created_at, sa.price price
                                from ( select os.saucer_id
                                       from orders as o join order_saucers as os on o.id = os.order_id
-                                      where o.user_id = ? and o.action = "taken"
+                                      where o.table_number = ? and o.action = "taken"
                                     ) as os
                                     right join saucers as sa on os.saucer_id = sa.id
                                 where os.saucer_id is null
                                 limit ?,9
-                            ', [ \Auth::user()->id, $request->input('offset')*9 ] );
+                            ', [ $request->input('table_number'), $request->input('offset')*9 ] );
     $saucers = array_map(function ($value) {
         $value->image = base64_encode($value->image);
         return $value;
@@ -103,7 +104,6 @@ Route::post( '/getSoucers', function(Request $request) {
 } )->name('saucers.get');
 
 Route::post( '/updateOrder/{orderid}', function ( $orderid, Request $request ) {
-    $keys='hola';
     if( sizeof( $request->input() ) === 0 ) {
         $keys = 'empty';
     }else{
@@ -147,6 +147,37 @@ Route::post( '/orderPayed/{orderid}', function ( $orderid, Request $request ) {
 
     return response()->json([ 'success'=>$orderid ]);
 } )->name('order.payed');
+
+Route::post('getOrder', function(Request $request){
+    $countSaucers = DB::select('select count(*) countSaucers from saucers');
+
+    $saucers = DB::select('select sa.id, sa.name name, sa.image image, sa.description description, sa.type type, sa.created_at created_at, sa.price price
+                               from ( select os.saucer_id
+                                      from orders as o join order_saucers as os on o.id = os.order_id
+                                      where o.table_number = ? and o.action = "taken"
+                                    ) as os
+                                    right join saucers as sa on os.saucer_id = sa.id
+                                where os.saucer_id is null
+                                limit ?,9
+                            ', [ $request->input('table_number'), 0 ] );
+
+    $saucers = array_map(function ($value) {
+        $value->image = base64_encode($value->image);
+        return $value;
+    }, $saucers);
+
+    $order = DB::select('select o.id order_id, s.name name, s.price price, os.saucer_id saucer_id, os.count count, s.price*os.count total
+                            from orders as o, order_saucers as os, saucers as s
+                            where o.id = os.order_id
+                                and os.saucer_id = s.id
+                                and o.action="taken"
+                                and o.table_number=?', [ $request->input('table_number') ]
+                        );
+
+    $pageCount = ($countSaucers[0]->countSaucers-sizeof($order))/9;
+
+    return response()->json([ 'success'=>true, 'order'=>$order, 'saucers'=>$saucers, 'pageCount'=>$pageCount ]);
+})->name('order.get');
 
 Auth::routes();
 
