@@ -56,7 +56,6 @@ $router->get( '/branchoffices', 'BranchOfficesController@index')->name('restaura
 
 Route::post( '/addOrder/{table_number}', function ( $table_number, Request $request ) {
     $saucer =  $request->input();
-    // var_dump(sizeof( $saucer ));
     $keys = array();
     $matches = array();
 
@@ -98,14 +97,16 @@ Route::post( '/getSoucers', function(Request $request) {
         return $value;
     }, $saucers);
 
-    // var_dump($saucers);
-
     return response()->json(['saucers'=>($saucers)]);
 } )->name('saucers.get');
 
 Route::post( '/updateOrder/{orderid}', function ( $orderid, Request $request ) {
     if( sizeof( $request->input() ) === 0 ) {
-        $keys = 'empty';
+        DB::beginTransaction();
+
+            DB::delete('delete from order_saucers where order_id=?',[$orderid]);
+
+        DB::commit();
     }else{
         $saucer =  $request->input();
         $matches = array();
@@ -123,9 +124,11 @@ Route::post( '/updateOrder/{orderid}', function ( $orderid, Request $request ) {
                 ]);
             }
         DB::commit();
+
+        $table_number = DB::select('select table_number from orders where id = ?',[$orderid]);
     }
 
-    return response()->json([ 'success'=>$orderid ]);
+    return response()->json([ 'success'=>$orderid, 'table_number'=>$table_number[0]->table_number ]);
 } )->name('order.update');
 
 Route::post( '/cancelOrder/{orderid}', function ( $orderid, Request $request ) {
@@ -182,3 +185,29 @@ Route::post('getOrder', function(Request $request){
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post( '/searchForSaucer', function(Request $request) {
+
+    $saucer = $request->input('saucer');
+    $order = $request->input('order_id');
+
+    $subquery = DB::table('orders')
+                  ->select('order_saucers.saucer_id as saucer_id')
+                  ->join('order_saucers','orders.id','=','order_saucers.order_id')
+                  ->where('orders.id','=',(int)$order);
+    $saucers = DB::table('saucers')
+                  ->leftjoinsub($subquery,'subquery', function ($join) {
+                      $join->on('saucers.id','=','subquery.saucer_id');
+                  })
+                  ->where('saucers.name','like',"%{$saucer}%")
+                  ->whereNull('subquery.saucer_id')
+                  ->get()
+                  ->toArray();
+
+    $saucers = array_map(function ($value) {
+        $value->image = base64_encode($value->image);
+        return $value;
+    }, $saucers);
+
+    return response()->json(['saucers'=>($saucers)]);
+} )->name('saucers.search');
