@@ -42,7 +42,7 @@
                     <img class="card-img-top" height="240rem" src="{{ asset('imgs/pedido.jpeg' ) }}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">Pedido</h5>
-                        <p class="card-text">La siguiente lista muestra los platillos que se solicitara al dar click en el botón enviar.</p>
+                        <p class="card-text">La siguiente lista muestra los platillos que se solicitará al dar click en el botón enviar.</p>
                     </div>
                     <form id="pedido">
                         <ul class="list-group list-group-flush" id="list">
