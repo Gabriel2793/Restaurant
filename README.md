@@ -37,29 +37,29 @@ Fue probado en Ubuntu 18.04
 
 Este proyecto es un sistema para un restaurante, en el cual la página principal se muestran los platillos que se ofrecen, cómo en la siguiente imagen:
 
-![](https://raw.githubusercontent.com/Gabriel2793/Restaurant/master/readmeimages/Screenshot_2020-09-12 Home.jpg)
+![](https://raw.githubusercontent.com/Gabriel2793/Restaurant/master/readmeimages/Home.jpg)
 
 El cliente podra visualizar además de los platillos las sucursales existentes en el mundo, por lo que al dar click en "Sucursales", se mostrara un Mapa de Mapbox, que se le agrego funcionalidad con el framework de leaflet, por lo que el cliente podrá dar click en alguno de los botones para visualizar en el mapa la sucursal o su localización actual y también podra solicitar la sucursal más cercana a su localización, la siguiente imagen es una muestra de lo que vera:
 
-![](https://raw.githubusercontent.com/Gabriel2793/Restaurant/master/readmeimages/Screenshot_2020-09-27%20Branch%20Offices.png)
+![](https://raw.githubusercontent.com/Gabriel2793/Restaurant/master/readmeimages/Branch20Offices.png)
 
 Al mostrarle al cliente su mesa, se le tomara la orden por lo que el mesero iniciara sesión dando click en "Ingresar"  y facilitando su usuaro y contraseña, posteriormente se visualizará una página con una imagen haciendo referencia al acomodado de las mesas en el establecimiento, cómo se muestra en la siguiente imagen:
 
 
 
-![](https://raw.githubusercontent.com/Gabriel2793/Restaurant/master/readmeimages/Screenshot_2020-09-16 Laravel.png)
+![](https://raw.githubusercontent.com/Gabriel2793/Restaurant/master/readmeimages/Laravel2.png)
 
 Al dar click en la mesa asignada al cliente, se mostraran dos columnas extras, una para los platillos a seleccionar, también se enseñan varios botones con números, al dar click en uno de ellos se recuperarán los platillos respectivos, el primero de ellos, regresara los primeros nueve, el segundo los siguientes nueve, así susecivamente hasta llegar al último botón que mostrara los últimos platillos, y la segunda columna sirve para mostrar los platillos seleccionados que quiere el cliente en su orden, para guardar la orden se dara click en el botón "Enviar":
 
-![](https://raw.githubusercontent.com/Gabriel2793/Restaurant/master/readmeimages/Screenshot_2020-09-16 Laravel(1).png)
+![](https://raw.githubusercontent.com/Gabriel2793/Restaurant/master/readmeimages/Laravel4.png)
 
 La siguiente imagen muestra cómo se ve la lista de platillos seleccionados, en caso de querer eliminar algún platillo de la orden, se debe dar click en el botón rojo con una x correspondiente al elemento:
 
-![](https://raw.githubusercontent.com/Gabriel2793/Restaurant/master/readmeimages/Screenshot_2020-09-16 Laravel.jpg)
+![](https://raw.githubusercontent.com/Gabriel2793/Restaurant/master/readmeimages/Laravel.jpg)
 
 Siempre se mostraran nueve platillos a la vez, por lo que al dar click en algún número en la parte inferior, se solicitaran los siguiente nueve platillos o los restantes, la siguiente imagen lo ejemplifica:
 
-![](https://raw.githubusercontent.com/Gabriel2793/Restaurant/master/readmeimages/Screenshot_2020-09-16 Laravel(2).png)
+![](https://raw.githubusercontent.com/Gabriel2793/Restaurant/master/readmeimages/Laravel5.png)
 
 NOTA: Se utiliza JQUERY para quitar de la vista los platillos que se muestran y se reemplazan por los nueve platillos que siguen o en su defecto los que quedan. La paginación se hace de manera dinamica, por lo que al tener veinte platillos en la base de datos se mostraran tres números para ir por toda la lista, pero se tiene el campo de busqueda para encontrar rapidamente lo que se desea. Al dar click en el botón enviar, se almacenara la orden, pero si se sale de la sesión o se actualiza la página antes de ésta acción estos desaparecerán.
 
@@ -67,13 +67,13 @@ Al enviar los platillos se podran agregar más o eliminar los deseados, para alm
 
 
 
-![](https://raw.githubusercontent.com/Gabriel2793/Restaurant/master/readmeimages/Screenshot_2020-09-16 Laravel(1).jpg)
+![](https://raw.githubusercontent.com/Gabriel2793/Restaurant/master/readmeimages/Laravel3.jpg)
 
 También se tiene la parte de administración del sistema, para agregar más platillos o más sucursales, las siguientes dos imagenes muestran los formularios para agregarlos:
 
-![]()![Screenshot_2020-09-16 Add Restaurant](https://raw.githubusercontent.com/Gabriel2793/Restaurant/master/readmeimages/Screenshot_2020-09-16 Add Restaurant.png)
+![]()![Screenshot_2020-09-16 Add Restaurant](https://raw.githubusercontent.com/Gabriel2793/Restaurant/master/readmeimages/AddRestaurant.png)
 
-![](https://raw.githubusercontent.com/Gabriel2793/Restaurant/master/readmeimages/Screenshot_2020-09-16 Add Restaurant(1).png)
+![](https://raw.githubusercontent.com/Gabriel2793/Restaurant/master/readmeimages/AddRestaurant(1).png)
 
 El registro del empleado es esencial, para así cuando ingrese al sistema a tomar la orden de un cliente se sepa quien fue:
 
