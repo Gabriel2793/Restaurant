@@ -12,7 +12,6 @@ class AddRestaurantController extends BaseController
         // var_dump( $file );
         $points=DB::table('branch_offices')
         ->insert(array(
-            'user_id'=>1,
             'branch_office'=>DB::raw("(ST_GeomFromText('POINT(".$request->input('RestaurantLatitude').' '.$request->input('RestaurantLongitude').")'))"),
             'image' => $file,
             'restaurant_name'=>'"'.$request->input("RestaurantName").'"',
