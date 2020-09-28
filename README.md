@@ -41,7 +41,7 @@ Este proyecto es un sistema para un restaurante, en el cual la página principal
 
 El cliente podra visualizar además de los platillos las sucursales existentes en el mundo, por lo que al dar click en "Sucursales", se mostrara un Mapa de Mapbox, que se le agrego funcionalidad con el framework de leaflet, por lo que el cliente podrá dar click en alguno de los botones para visualizar en el mapa la sucursal o su localización actual y también podra solicitar la sucursal más cercana a su localización, la siguiente imagen es una muestra de lo que vera:
 
-![](https://raw.githubusercontent.com/Gabriel2793/Restaurant/master/readmeimages/Branch20Offices.png)
+![](https://raw.githubusercontent.com/Gabriel2793/Restaurant/master/readmeimages/BranchOffices.png)
 
 Al mostrarle al cliente su mesa, se le tomara la orden por lo que el mesero iniciara sesión dando click en "Ingresar"  y facilitando su usuaro y contraseña, posteriormente se visualizará una página con una imagen haciendo referencia al acomodado de las mesas en el establecimiento, cómo se muestra en la siguiente imagen:
 
@@ -77,7 +77,7 @@ También se tiene la parte de administración del sistema, para agregar más pla
 
 El registro del empleado es esencial, para así cuando ingrese al sistema a tomar la orden de un cliente se sepa quien fue:
 
-![](https://raw.githubusercontent.com/Gabriel2793/Restaurant/master/readmeimages/Screenshot_2020-09-16 Laravel(3).png)
+![](https://raw.githubusercontent.com/Gabriel2793/Restaurant/master/readmeimages/Laravel6.png)
 
 Este sistema está optimizado para poder ser utilizado con dispositivos moviles, cada una de las siguientes imágenes muestra la presentación de cada página en el sitio web de manera responsiva:
 
